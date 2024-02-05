@@ -3,7 +3,7 @@
 namespace Drupal\social_media_platforms\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Url;
+use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Theme\ThemeManager;
 use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Template\Attribute;
@@ -19,7 +19,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
  *   category = @Translation("Social Media Platforms"),
  * )
  */
-class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface {
+final class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
     /**
    * Constructs a Drupalist object.
@@ -42,6 +42,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
     $plugin_definition,
     protected ThemeManager $themeManager,
     protected ExtensionPathResolver $pathResolver,
+    protected ConfigFactory $config
   ) {
     parent::__construct($configuration,
     $plugin_id,
@@ -52,13 +53,14 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition ) {
-    return new static(
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('theme.manager'),
       $container->get('extension.path.resolver'),
+      $container->get('config.factory'),
     );
   }
 
@@ -66,7 +68,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function build() {
-    $config =  \Drupal::config('social_media_platforms.settings')->get();
+    $config =  $this->config->get('social_media_platforms.settings')->get();
     $output = [];
     $links = [];
     $path = $this->pathResolver->getPath('module', 'social_media_platforms');

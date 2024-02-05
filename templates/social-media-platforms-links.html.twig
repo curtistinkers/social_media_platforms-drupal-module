@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Template to display ain social media icon with a link.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the item.
+ * - links: A nested list of link items. Each link item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - image_url: The social media link image path.
+ *   - title: The link title.
+ *   - link_url: The link URL, instance of \Drupal\Core\Url
+ */
+#}
+
+<div{{ attributes }}>
+    {% for key, link in links %}
+        {% if link.link_url|render|trim is not empty  %}
+        <a class="social-media-platforms__link" href="{{ link.link_url }}" {{ link.attributes }}>
+            <img  class="social-media-platforms__icon" src="{{ link.image_url }}" width=30 />
+            {{ link.title }}
+        </a>
+        {% endif %}
+    {% endfor %}
+</div>

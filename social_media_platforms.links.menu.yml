@@ -1,0 +1,5 @@
+social_media_platforms.settings:
+  title: Social Media Platforms
+  parent: system.admin_config_system
+  route_name: social_media_platforms.settings
+  weight: 10

@@ -1,0 +1,25 @@
+# Schema for the configuration files of the Social Media Platforms module.
+social_media_platforms.settings:
+  type: config_object
+  label: 'Social Media Platforms settings'
+  mapping:
+
+    facebook:
+      type: uri
+      label: 'Facebook URL'
+
+    youtube:
+      type: uri
+      label: 'Youtube URL'
+
+    linkedin:
+      type: uri
+      label: 'Linkedin'
+
+    x:
+      type: uri
+      label: 'X'
+
+    instagram:
+      type: uri
+      label: 'Instagram'

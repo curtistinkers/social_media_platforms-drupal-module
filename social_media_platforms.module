@@ -11,21 +11,30 @@ use Drupal\Core\Template\Attribute;
  * Implements hook_theme().
  */
 function social_media_platforms_theme($existing, $type, $theme, $path) {
-    return [
-        'social_media_platforms_links' => [
-            'variables' => [
-              'links' => [],
-              'attributes' => new Attribute(),
-            ],
-            'template' => 'social-media-platforms-links',
+  return [
+    'social_media_platforms_links' => [
+      'variables' => [
+        'links' => [],
+        'attributes' => new Attribute(),
       ],
-    ];
-  }
-
+      'template' => 'social-media-platforms-links',
+    ],
+  ];
+}
 
 /**
  * Attaching css file.
  */
 function social_media_platforms_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'social_media_platforms/social_media_platforms.theme';
+}
+
+/**
+ * Implements hook_help().
+ */
+function social_media_platforms_help($path, $arg) {
+  switch ($path) {
+    case 'help.page.social_media_platforms':
+      return '<p>' . t('This module allows to configure social media platform urls and display them in a block.') . '</p>';
+  }
 }

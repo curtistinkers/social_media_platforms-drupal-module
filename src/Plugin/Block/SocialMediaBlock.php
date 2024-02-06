@@ -4,11 +4,11 @@ namespace Drupal\social_media_platforms\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\ConfigFactory;
-use Drupal\Core\Theme\ThemeManager;
 use Drupal\Core\Extension\ExtensionPathResolver;
-use Drupal\Core\Template\Attribute;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Theme\ThemeManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a Social Media Links block.
@@ -21,7 +21,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
  */
 final class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-    /**
+  /**
    * Constructs a Drupalist object.
    *
    * @param array $configuration
@@ -34,8 +34,9 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
    *   The theme manager.
    * @param \Drupal\Core\Extension\ExtensionPathResolver $pathResolver
    *   The path resolver.
+   * @param \Drupal\Core\Config\ConfigFactory $config
+   *   The config factory.
    */
-
   public function __construct(
     array $configuration,
     $plugin_id,
@@ -47,7 +48,7 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     parent::__construct($configuration,
     $plugin_id,
     $plugin_definition,
-  );
+    );
   }
 
   /**
@@ -68,18 +69,18 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function build() {
-    $config =  $this->config->get('social_media_platforms.settings')->get();
+    $config = $this->config->get('social_media_platforms.settings')->get();
     $output = [];
     $links = [];
     $path = $this->pathResolver->getPath('module', 'social_media_platforms');
 
     foreach ($config as $key => $value) {
-      $imagePath = '/' . $path . '/images/' . $key.'.png';
+      $imagePath = '/' . $path . '/images/' . $key . '.png';
       $links[$key] = [
         'link_url' => $value,
         'image_url' => $imagePath,
         'attributes' => new Attribute(),
-        'title' =>  $key,
+        'title' => $key,
       ];
     }
 

@@ -1,7 +1,7 @@
 
 .social-media-platforms__link {
-    text-decoration: none;
     margin-right: 15px;
+    text-decoration: none;
 }
 .social-media-platforms__link:hover {
     color: #0a58ca;

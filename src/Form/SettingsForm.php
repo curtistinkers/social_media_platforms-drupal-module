@@ -20,6 +20,12 @@ final class SettingsForm extends ConfigFormBase {
     'instagram' => 'Instagram',
   ];
 
+  const SETTINGS = [
+    'show_icon' => 'Show icon',
+    'target_blank' => 'Open link in new tab',
+    'show_label' => 'Show label',
+  ];
+
   /**
    * {@inheritdoc}
    */
@@ -41,6 +47,14 @@ final class SettingsForm extends ConfigFormBase {
 
     $config = $this->config('social_media_platforms.settings');
 
+    foreach (self::SETTINGS as $key => $setting) {
+      $form[$key] = [
+        '#type' => 'checkbox',
+        '#title' => $setting,
+        '#default_value' => $config->get($key),
+      ];
+    }
+
     foreach (self::SOCIAL_PLATFORMS as $key => $social_platform) {
       $form[$key . '_url'] = [
         '#type' => 'url',
@@ -61,6 +75,11 @@ final class SettingsForm extends ConfigFormBase {
 
     foreach (self::SOCIAL_PLATFORMS as $key => $social_platform) {
       $value = $form_state->getValue($key . '_url');
+      $config->set($key, $value);
+    }
+
+    foreach (self::SETTINGS as $key => $setting) {
+      $value = $form_state->getValue($key);
       $config->set($key, $value);
     }
 

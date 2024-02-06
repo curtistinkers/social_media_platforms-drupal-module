@@ -23,3 +23,15 @@ social_media_platforms.settings:
     instagram:
       type: uri
       label: 'Instagram'
+
+    show_icon:
+      type: boolean
+      label: 'Show icon'
+
+    show_label:
+      type: boolean
+      label: 'Show label'
+
+    target_blank:
+      type: boolean
+      label: 'Open link in new tab'

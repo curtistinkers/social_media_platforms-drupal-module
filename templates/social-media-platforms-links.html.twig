@@ -13,13 +13,21 @@
  */
 #}
 
-<div{{ attributes }}>
+{% set link_classes = ['social-media-platforms__link '] %}
+{% set container_classes = ['social-media-platforms__container '] %}
+
+<div{{ attributes.addClass(container_classes) }} {{ attributes|without('class') }}>
     {% for key, link in links %}
         {% if link.link_url|render|trim is not empty  %}
-        <a class="social-media-platforms__link" href="{{ link.link_url }}" {{ link.attributes }}>
-            <img  class="social-media-platforms__icon" src="{{ link.image_url }}" width=30 />
-            {{ link.title }}
-        </a>
+          {% set link_classes = link_classes|merge(['social-media-platforms__link--' ~ key]) %}
+          <a{{ link.attributes.addClass(link_classes) }} href="{{ link.link_url }}" {{ target_blank ? 'target="_blank"' : '' }} {{ attributes|without('class') }} >
+            {% if show_icon  %}
+              <img class="social-media-platforms__icon" src="{{ link.image_url }}" width=30 />
+            {% endif %}
+            {% if show_label  %}
+              {{ link.title }}
+            {% endif %}
+          </a>
         {% endif %}
     {% endfor %}
 </div>

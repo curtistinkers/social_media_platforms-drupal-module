@@ -8,6 +8,7 @@ use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Theme\ThemeManager;
+use Drupal\social_media_platforms\Form\SettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -74,13 +75,15 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     $links = [];
     $path = $this->pathResolver->getPath('module', 'social_media_platforms');
 
-    foreach ($config as $key => $value) {
+    $configLinks = array_intersect_key($config, SettingsForm::SOCIAL_PLATFORMS);
+
+    foreach ($configLinks as $key => $value) {
       $imagePath = '/' . $path . '/images/' . $key . '.png';
       $links[$key] = [
         'link_url' => $value,
         'image_url' => $imagePath,
         'attributes' => new Attribute(),
-        'title' => $key,
+        'title' => SettingsForm::SOCIAL_PLATFORMS[$key],
       ];
     }
 
@@ -90,6 +93,9 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
       '#attributes' => new Attribute(),
       '#theme' => 'social_media_platforms_links',
       '#links' => $links,
+      '#show_icon' => $config['show_icon'] ?? FALSE,
+      '#show_label' => $config['show_label'] ?? FALSE,
+      '#target_blank' => $config['target_blank'] ?? FALSE,
     ];
 
     return $output;

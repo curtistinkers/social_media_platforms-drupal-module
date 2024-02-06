@@ -16,6 +16,9 @@ function social_media_platforms_theme($existing, $type, $theme, $path) {
       'variables' => [
         'links' => [],
         'attributes' => new Attribute(),
+        'target_blank' => NULL,
+        'show_label' => NULL,
+        'show_icon' => NULL,
       ],
       'template' => 'social-media-platforms-links',
     ],

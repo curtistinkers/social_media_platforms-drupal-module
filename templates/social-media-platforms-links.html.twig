@@ -5,6 +5,9 @@
  *
  * Available variables:
  * - attributes: HTML attributes for the item.
+ * - show_icon:
+ * - show_label:
+ * - target_blank:
  * - links: A nested list of link items. Each link item contains:
  *   - attributes: HTML attributes for the menu item.
  *   - image_url: The social media link image path.
@@ -16,13 +19,13 @@
 {% set link_classes = ['social-media-platforms__link '] %}
 {% set container_classes = ['social-media-platforms__container '] %}
 
-<div{{ attributes.addClass(container_classes) }} {{ attributes|without('class') }}>
+<div{{ attributes.addClass(container_classes) }}>
     {% for key, link in links %}
         {% if link.link_url|render|trim is not empty  %}
           {% set link_classes = link_classes|merge(['social-media-platforms__link--' ~ key]) %}
-          <a{{ link.attributes.addClass(link_classes) }} href="{{ link.link_url }}" {{ target_blank ? 'target="_blank"' : '' }} {{ attributes|without('class') }} >
+          <a{{ link.attributes.addClass(link_classes) }} href="{{ link.link_url }}" {{ target_blank ? 'target="_blank"' : '' }}>
             {% if show_icon  %}
-              <img class="social-media-platforms__icon" src="{{ link.image_url }}" width=30 />
+              <img class="social-media-platforms__icon" src="{{ link.image_url }}" alt="{{ key }}" width=30 />
             {% endif %}
             {% if show_label  %}
               {{ link.title }}

@@ -71,6 +71,7 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
    */
   public function build() {
     $config = $this->config->get('social_media_platforms.settings')->get();
+    $tags = $this->config->get('social_media_platforms.settings')->getCacheTags();
     $output = [];
     $links = [];
     $path = $this->pathResolver->getPath('module', 'social_media_platforms');
@@ -98,6 +99,7 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
       '#target_blank' => $config['target_blank'] ?? FALSE,
     ];
 
+    $output['#cache']['tags'] = $tags;
     return $output;
   }
 

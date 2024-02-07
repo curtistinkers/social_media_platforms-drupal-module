@@ -88,4 +88,14 @@ final class SettingsForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($form_state->isValueEmpty('show_label') && $form_state->isValueEmpty('show_icon')) {
+      $form_state->setErrorByName('form', t('Show label or show icon must be checked'));
+    }
+    parent::validateForm($form, $form_state);
+  }
+
 }

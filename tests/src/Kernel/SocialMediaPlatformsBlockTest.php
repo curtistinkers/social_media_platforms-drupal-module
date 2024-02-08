@@ -205,7 +205,7 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
   public function testLinksAttributes(): void {
     $links = $this->getLinksValue();
 
-    $links[0]['attributes']->addClass(['test']);
+    $links['youtube']['attributes']->addClass(['test']);
     $content = [
       '#theme' => 'social_media_platforms_links',
       '#links' => $links,

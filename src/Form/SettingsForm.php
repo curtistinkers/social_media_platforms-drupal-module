@@ -117,7 +117,7 @@ final class SettingsForm extends ConfigFormBase {
     foreach (self::SETTINGS as $key => $setting) {
       $display_options[$key] = $form_state->getValue($key);
     }
-    $config->set('display_options',$display_options);
+    $config->set('display_options', $display_options);
 
     $platforms = $config->get('platforms');
     $value = $form_state->getValue('table');
@@ -143,7 +143,7 @@ final class SettingsForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->isValueEmpty('show_label') && $form_state->isValueEmpty('show_icon')) {
-      $form_state->setErrorByName('form', t('Show label or show icon must be checked'));
+      $form_state->setErrorByName('form', $this->t('Show label or show icon must be checked'));
     }
     parent::validateForm($form, $form_state);
   }

@@ -61,9 +61,9 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
     $path = $this->pathResolver->getPath('module', 'social_media_platforms');
 
     $links['youtube'] = [
-      'link_url' => 'https://www.youtube.com',
-      'title' => 'Youtube',
-      'image_url' => "/$path/images/youtube.png",
+      'url' => 'https://www.youtube.com',
+      'label' => 'Youtube',
+      'image' => "/$path/images/youtube.png",
       'attributes' => new Attribute(),
     ];
 
@@ -94,15 +94,18 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => TRUE,
-      '#show_label' => FALSE,
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => TRUE,
+        'show_label' => FALSE,
+        'target_blank' => FALSE,
+      ],
     ];
 
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
     $this->assertText('');
-    $this->assertLinkByHref($links['youtube']['link_url']);
+    $this->assertLinkByHref($links['youtube']['url']);
     $img = $this->cssSelect('a.social-media-platforms__link--youtube > img');
     $this->assertCount(1, $img);
   }
@@ -115,16 +118,18 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => FALSE,
-      '#show_label' => TRUE,
-      '#attributes' => new Attribute(),
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => FALSE,
+        'show_label' => TRUE,
+        'target_blank' => FALSE,
+      ],
     ];
 
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
-    $this->assertText($links['youtube']['title']);
-    $this->assertLinkByHref($links['youtube']['link_url']);
+    $this->assertText($links['youtube']['label']);
+    $this->assertLinkByHref($links['youtube']['url']);
     $img = $this->cssSelect('a.social-media-platforms__link--youtube > img');
     $this->assertCount(0, $img);
   }
@@ -137,16 +142,18 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => TRUE,
-      '#show_label' => TRUE,
-      '#attributes' => new Attribute(),
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => TRUE,
+        'show_label' => TRUE,
+        'target_blank' => FALSE,
+      ],
     ];
 
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
-    $this->assertText($links['youtube']['title']);
-    $this->assertLinkByHref($links['youtube']['link_url']);
+    $this->assertText($links['youtube']['label']);
+    $this->assertLinkByHref($links['youtube']['url']);
     $img = $this->cssSelect('a.social-media-platforms__link--youtube > img');
     $this->assertCount(1, $img);
   }
@@ -159,11 +166,12 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => TRUE,
-      '#show_label' => TRUE,
-      '#attributes' => new Attribute(),
-      '#target_blank' => TRUE,
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => FALSE,
+        'show_label' => TRUE,
+        'target_blank' => TRUE,
+      ],
     ];
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
@@ -185,11 +193,15 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => TRUE,
-      '#show_label' => TRUE,
-      '#attributes' => ['class' => ['test']],
-      '#target_blank' => TRUE,
+      '#attributes' => [
+        'class' => ['test'],
+      ],
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => FALSE,
+        'show_label' => TRUE,
+        'target_blank' => FALSE,
+      ],
     ];
 
     $output = $this->renderer->renderRoot($content);
@@ -208,11 +220,12 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
     $links['youtube']['attributes']->addClass(['test']);
     $content = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => TRUE,
-      '#show_label' => TRUE,
-      '#attributes' => new Attribute(),
-      '#target_blank' => TRUE,
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => FALSE,
+        'show_label' => TRUE,
+        'target_blank' => FALSE,
+      ],
     ];
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);

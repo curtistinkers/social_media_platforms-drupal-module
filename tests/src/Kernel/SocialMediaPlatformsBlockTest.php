@@ -111,45 +111,113 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
    * Tests the theme with label and no icon.
    */
   public function testLinksLabelNoIcon(): void {
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $links = $this->getLinksValue();
+
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#links' => $links,
+      '#show_icon' => FALSE,
+      '#show_label' => TRUE,
+      '#attributes' => new Attribute(),
+    ];
+
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $this->assertText($links['youtube']['title']);
+    $this->assertLinkByHref($links['youtube']['link_url']);
+    $img = $this->cssSelect('a.social-media-platforms__link--youtube > img');
+    $this->assertCount(0, $img);
   }
 
   /**
    * Tests the theme with label and icon.
    */
   public function testLinksLabelAndIcon(): void {
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $links = $this->getLinksValue();
+
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#links' => $links,
+      '#show_icon' => TRUE,
+      '#show_label' => TRUE,
+      '#attributes' => new Attribute(),
+    ];
+
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $this->assertText($links['youtube']['title']);
+    $this->assertLinkByHref($links['youtube']['link_url']);
+    $img = $this->cssSelect('a.social-media-platforms__link--youtube > img');
+    $this->assertCount(1, $img);
   }
 
   /**
    * Tests the theme target blank for the links.
    */
   public function testLinksTargetBlankLabel(): void {
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $links = $this->getLinksValue();
+
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#links' => $links,
+      '#show_icon' => TRUE,
+      '#show_label' => TRUE,
+      '#attributes' => new Attribute(),
+      '#target_blank' => TRUE,
+    ];
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
+    $this->assertCount(1, $ahref);
+
+    $content['#target_blank'] = FALSE;
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
+    $this->assertCount(0, $ahref);
   }
 
   /**
    * Tests adding global attributes to the theme container.
    */
   public function testLinksGlobalAttributes(): void {
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $links = $this->getLinksValue();
+
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#links' => $links,
+      '#show_icon' => TRUE,
+      '#show_label' => TRUE,
+      '#attributes' => ['class' => ['test']],
+      '#target_blank' => TRUE,
+    ];
+
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $container = $this->cssSelect('div.social-media-platforms__container.test');
+
+    $this->assertCount(1, $container);
   }
 
   /**
    * Tests adding link attributes to the individual links.
    */
   public function testLinksAttributes(): void {
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $links = $this->getLinksValue();
+
+    $links['youtube']['attributes']->addClass(['test']);
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#links' => $links,
+      '#show_icon' => TRUE,
+      '#show_label' => TRUE,
+      '#attributes' => new Attribute(),
+      '#target_blank' => TRUE,
+    ];
+    $output = $this->renderer->renderRoot($content);
+    $this->setRawContent($output);
+    $ahref = $this->cssSelect('a.social-media-platforms__link.test');
+    $this->assertCount(1, $ahref);
   }
 
 }

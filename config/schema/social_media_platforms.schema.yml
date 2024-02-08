@@ -4,34 +4,39 @@ social_media_platforms.settings:
   label: 'Social Media Platforms settings'
   mapping:
 
-    facebook:
-      type: uri
-      label: 'Facebook URL'
+    display_options:
+      type: mapping
+      label: 'Display options'
+      mapping:
+        show_icon:
+          type: boolean
+          label: 'Show icon'
 
-    youtube:
-      type: uri
-      label: 'Youtube URL'
+        show_label:
+          type: boolean
+          label: 'Show label'
 
-    linkedin:
-      type: uri
-      label: 'Linkedin'
+        target_blank:
+          type: boolean
+          label: 'Open link in new tab'
 
-    x:
-      type: uri
-      label: 'X'
+    platforms:
+      type: sequence
+      label: 'Available platforms'
+      orderby: key
+      sequence:
+        type: mapping
+        mapping:
 
-    instagram:
-      type: uri
-      label: 'Instagram'
+          label:
+            type: label
+            label: 'Platform label'
 
-    show_icon:
-      type: boolean
-      label: 'Show icon'
+          url:
+            type: uri
+            label: 'Platform url'
 
-    show_label:
-      type: boolean
-      label: 'Show label'
+          weight:
+            type: integer
+            label: 'Weight'
 
-    target_blank:
-      type: boolean
-      label: 'Open link in new tab'

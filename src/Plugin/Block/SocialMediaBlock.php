@@ -10,7 +10,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Theme\ThemeManager;
 use Drupal\Core\Url;
-use Drupal\social_media_platforms\Form\SettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -72,36 +71,38 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function build() {
-    $config = $this->config->get('social_media_platforms.settings')->get();
-    $tags = $this->config->get('social_media_platforms.settings')->getCacheTags();
-    $output = [];
-    $links = [];
-    $path = $this->pathResolver->getPath('module', 'social_media_platforms');
 
-    $configLinks = array_intersect_key($config, SettingsForm::SOCIAL_PLATFORMS);
+    $path = '/' . $this->pathResolver->getPath('module', 'social_media_platforms') . '/images';
+    $config = $this->config->get('social_media_platforms.settings');
 
-    foreach ($configLinks as $key => $value) {
-      $imagePath = '/' . $path . '/images/' . $key . '.png';
-      $links[$key] = [
-        'link_url' => $value,
-        'image_url' => $imagePath,
-        'attributes' => new Attribute(),
-        'title' => SettingsForm::SOCIAL_PLATFORMS[$key],
-      ];
-    }
-
-    $this->themeManager->alter('social_media_platforms', $links);
-
-    $output['links'] = [
-      '#attributes' => new Attribute(),
+    $output = [
       '#theme' => 'social_media_platforms_links',
-      '#links' => $links,
-      '#show_icon' => $config['show_icon'] ?? FALSE,
-      '#show_label' => $config['show_label'] ?? FALSE,
-      '#target_blank' => $config['target_blank'] ?? FALSE,
+      '#cache' => [
+        'tags' => $config->getCacheTags(),
+        'context' => $config->getCacheContexts(),
+        'max-age' => $config->getCacheMaxAge(),
+      ],
     ];
 
-    $output['#cache']['tags'] = $tags;
+    $output['#display_options'] = $config->get('display_options');
+
+    $platforms = $config->get('platforms');
+    $weights = array_combine(
+      array_keys($platforms),
+      array_column($platforms, 'weight')
+    );
+    asort($weights);
+
+    foreach ($weights as $key => $weight) {
+      $output['#platforms'][$key] = array_merge(
+        $platforms[$key],
+        [
+          'image' => "$path/$key.png",
+          'attributes' => new Attribute(),
+        ]
+      );
+    }
+
     return $output;
   }
 

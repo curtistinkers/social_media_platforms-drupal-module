@@ -12,18 +12,10 @@ use Drupal\Core\Form\FormStateInterface;
  */
 final class SettingsForm extends ConfigFormBase {
 
-  const SOCIAL_PLATFORMS = [
-    'facebook' => 'Facebook',
-    'youtube' => 'Youtube',
-    'linkedin' => 'Linkedin',
-    'x' => 'X',
-    'instagram' => 'Instagram',
-  ];
-
   const SETTINGS = [
     'show_icon' => 'Show icon',
-    'target_blank' => 'Open link in new tab',
     'show_label' => 'Show label',
+    'target_blank' => 'Open link in new tab',
   ];
 
   /**
@@ -46,20 +38,68 @@ final class SettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $config = $this->config('social_media_platforms.settings');
+    $display_options = $config->get('display_options');
+
+    $form['display'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Display options'),
+    ];
 
     foreach (self::SETTINGS as $key => $setting) {
-      $form[$key] = [
+      $form['display'][$key] = [
         '#type' => 'checkbox',
         '#title' => $setting,
-        '#default_value' => $config->get($key),
+        '#default_value' => $display_options[$key],
       ];
     }
 
-    foreach (self::SOCIAL_PLATFORMS as $key => $social_platform) {
-      $form[$key . '_url'] = [
+    $form['table'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('Label'),
+        $this->t('URL'),
+        $this->t('Weight'),
+      ],
+      '#tabledrag' => [
+        [
+          'action' => 'order',
+          'relationship' => 'sibling',
+          'group' => 'table-sort-weight',
+        ],
+      ],
+    ];
+
+    $platforms = $config->get('platforms');
+
+    $weights = array_combine(
+      array_keys($platforms),
+      array_column($platforms, 'weight')
+    );
+    asort($weights);
+
+    foreach ($weights as $index => $weight) {
+      $platform = $platforms[$index];
+      $form['table'][$index]['#attributes']['class'][] = 'draggable';
+      $form['table'][$index]['#weight'] = $weight;
+
+      $form['table'][$index]['label'] = [
+        '#type' => 'textfield',
+        '#default_value' => $platform['label'],
+      ];
+
+      $form['table'][$index]['url'] = [
         '#type' => 'url',
-        '#title' => $social_platform,
-        '#default_value' => $config->get($key),
+        '#default_value' => $platform['url'],
+      ];
+
+      $form['table'][$index]['weight'] = [
+        '#type' => 'weight',
+        '#default_value' => $weight,
+        '#attributes' => [
+          'class' => [
+            'table-sort-weight',
+          ],
+        ],
       ];
     }
 
@@ -73,15 +113,25 @@ final class SettingsForm extends ConfigFormBase {
 
     $config = $this->configFactory()->getEditable('social_media_platforms.settings');
 
-    foreach (self::SOCIAL_PLATFORMS as $key => $social_platform) {
-      $value = $form_state->getValue($key . '_url');
-      $config->set($key, $value);
-    }
-
+    $display_options = $config->get('display_options');
     foreach (self::SETTINGS as $key => $setting) {
-      $value = $form_state->getValue($key);
-      $config->set($key, $value);
+      $display_options[$key] = $form_state->getValue($key);
     }
+    $config->set('display_options',$display_options);
+
+    $platforms = $config->get('platforms');
+    $value = $form_state->getValue('table');
+    foreach ($value as $key => $platform) {
+
+      if ($platform['url'] == '') {
+        $platform['url'] = NULL;
+      }
+
+      $platforms[$key]['label'] = $platform['label'];
+      $platforms[$key]['url'] = $platform['url'];
+      $platforms[$key]['weight'] = $platform['weight'];
+    }
+    $config->set('platforms', $platforms);
 
     $config->save();
 

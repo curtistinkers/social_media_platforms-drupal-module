@@ -60,7 +60,7 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
 
     $page->pressButton('edit-submit');
 
-    $this->drupalGet('/');
+    $this->drupalGet('<front>');
     $assert_session = $this->assertSession();
     $assert_session->elementsCount('css', '.social-media-platforms__link', 2);
     $links = $page->findAll('css', 'a.social-media-platforms__link');
@@ -70,7 +70,7 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
   }
 
   public function testEmptyConfiguration(): void {
-    $this->drupalGet('/');
+    $this->drupalGet('<front>');
     $assert_session = $this->assertSession();
     $assert_session->elementsCount('css', '.social-media-platforms__link', 0);
     $assert_session->elementsCount('css', '.social-media-platforms__container', 1);

@@ -94,6 +94,11 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     asort($weights);
 
     foreach ($weights as $key => $weight) {
+
+      if (!$platforms[$key]['url']) {
+        continue;
+      }
+
       $output['#platforms'][$key] = array_merge(
         $platforms[$key],
         [

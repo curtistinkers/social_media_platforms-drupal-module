@@ -177,8 +177,24 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
     $this->setRawContent($output);
     $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
     $this->assertCount(1, $ahref);
+  }
 
-    $content['#target_blank'] = FALSE;
+  /**
+   * Tests the theme target blank attribute is missing when set to false.
+   */
+  public function testLinksTargetBlankMissingLabel(): void {
+    $links = $this->getLinksValue();
+
+    $content = [
+      '#theme' => 'social_media_platforms_links',
+      '#platforms' => $links,
+      '#display_options' => [
+        'show_icon' => FALSE,
+        'show_label' => TRUE,
+        'target_blank' => FALSE,
+      ],
+    ];
+
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
     $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');

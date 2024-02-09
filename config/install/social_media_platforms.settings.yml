@@ -28,3 +28,8 @@ platforms:
     label: 'Instagram'
     url: null
     weight: 4
+
+  pinterest:
+    label: 'Pinterest'
+    url: null
+    weight: 5

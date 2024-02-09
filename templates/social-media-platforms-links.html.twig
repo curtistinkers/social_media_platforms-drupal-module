@@ -22,8 +22,11 @@
 
   {% set item_attributes = item.attributes.addClass([ 'social-media-platforms__link', 'social-media-platforms__link--' ~ key ]) %}
   {% set item_attributes = item_attributes.setAttribute('href', item.url) %}
-  {% set item_attributes = item_attributes.setAttribute('target', '_blank') %}
   {% set item_attributes = item_attributes.setAttribute('title', item.label) %}
+
+  {% if display_options.target_blank %}
+    {% set item_attributes = item_attributes.setAttribute('target', '_blank') %}
+  {% endif %}
 
   <a {{ item_attributes }}>
 

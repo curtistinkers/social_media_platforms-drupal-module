@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\Tests\social_media_platforms\Functional;
 
@@ -33,9 +35,9 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
     parent::setUp();
 
     $admin_user = $this->drupalCreateUser([
-     'administer site configuration',
-     'access content',
-     'access administration pages',
+      'administer site configuration',
+      'access content',
+      'access administration pages',
     ]);
     $this->drupalLogin($admin_user);
     $this->drupalGet('admin');
@@ -44,7 +46,7 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
   }
 
   /**
-   * Test callback.
+   * Test Links order.
    */
   public function testLinksOrder(): void {
 
@@ -53,7 +55,7 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
     $page = $this->getSession()->getPage();
 
     $page->checkField('edit-show-label');
-    $page->fillField('edit-table-facebook-url', 'https://facebook.com/SimonElectricES/');
+    $page->fillField('edit-table-facebook-url', 'https://facebook.com/');
     $page->selectFieldOption('edit-table-facebook-weight', '10');
     $page->fillField('edit-table-youtube-url', 'https://www.youtube.com/');
     $page->selectFieldOption('edit-table-youtube-weight', '-10');
@@ -69,6 +71,9 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
 
   }
 
+  /**
+   * Test empty configuration block rendering.
+   */
   public function testEmptyConfiguration(): void {
     $this->drupalGet('<front>');
     $assert_session = $this->assertSession();

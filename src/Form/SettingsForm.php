@@ -115,7 +115,7 @@ final class SettingsForm extends ConfigFormBase {
 
     $display_options = $config->get('display_options');
     foreach (self::SETTINGS as $key => $setting) {
-      $display_options[$key] = $form_state->getValue($key);
+      $display_options[$key] = $form_state->getValue($key) == 1;
     }
     $config->set('display_options', $display_options);
 
@@ -129,7 +129,7 @@ final class SettingsForm extends ConfigFormBase {
 
       $platforms[$key]['label'] = $platform['label'];
       $platforms[$key]['url'] = $platform['url'];
-      $platforms[$key]['weight'] = $platform['weight'];
+      $platforms[$key]['weight'] = intval($platform['weight']);
     }
     $config->set('platforms', $platforms);
 

@@ -14,6 +14,13 @@ use Drupal\Tests\BrowserTestBase;
 final class SocialMediaPlatformsTest extends BrowserTestBase {
 
   /**
+   * The testing user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $adminUser;
+
+  /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'claro';
@@ -34,15 +41,32 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    $admin_user = $this->drupalCreateUser([
+    $this->adminUser = $this->drupalCreateUser([
+      'administer site configuration',
+      'access content',
+      'access administration pages',
+      'administer social media platforms',
+    ]);
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('admin');
+    $this->drupalPlaceBlock('social_media_platform_block');
+  }
+
+  /**
+   * Test settings form permission.
+   */
+  public function testSettingsFormPermission(): void {
+    $this->drupalLogout();
+
+    $invalid_user = $this->drupalCreateUser([
       'administer site configuration',
       'access content',
       'access administration pages',
     ]);
-    $this->drupalLogin($admin_user);
-    $this->drupalGet('admin');
-    $this->drupalPlaceBlock('social_media_platform_block');
-    // Set up the test here.
+    $this->drupalLogin($invalid_user);
+
+    $this->drupalGet('/admin/config/services/social-media-platforms');
+    $this->assertSession()->statusCodeEquals(403);
   }
 
   /**
@@ -50,7 +74,7 @@ final class SocialMediaPlatformsTest extends BrowserTestBase {
    */
   public function testLinksOrder(): void {
 
-    $this->drupalGet('/admin/config/system/social-media-platforms');
+    $this->drupalGet('/admin/config/services/social-media-platforms');
     $this->assertSession()->pageTextContains('Social Media Platforms');
     $page = $this->getSession()->getPage();
 

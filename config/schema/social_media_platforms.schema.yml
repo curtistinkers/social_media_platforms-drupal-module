@@ -39,4 +39,3 @@ social_media_platforms.settings:
           weight:
             type: integer
             label: 'Weight'
-

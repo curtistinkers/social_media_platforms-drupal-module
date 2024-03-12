@@ -1,8 +1,11 @@
 # Social Media Platforms module
 
-Provides a block that allows to display a set of links to several social network profiles.
+Provides a block that allows to display a set of links to several social
+network profiles.
 
-This module differs from Social Media Links Block and Field in the fact that the social network configuration does not live in the block, but in a separate settings form.
+This module differs from Social Media Links Block and Field in the fact
+that the social network configuration does not live in the block, but in a
+separate settings form.
 
 ## Table of contents
 
@@ -28,7 +31,8 @@ For further information, see [Installing Drupal Modules](https://www.drupal.org/
 
 ## Configuration
 
-The module configuration is available under 'admin/config/services/social-media-platforms' path.
+The module configuration is available under
+'admin/config/services/social-media-platforms' path.
 
 ## Maintainers
 

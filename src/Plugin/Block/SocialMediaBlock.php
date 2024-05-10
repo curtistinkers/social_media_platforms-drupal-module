@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Constructs a Drupalist object.
+   * Constructs the Block instance.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.

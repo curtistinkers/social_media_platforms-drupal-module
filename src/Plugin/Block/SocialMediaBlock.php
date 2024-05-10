@@ -45,7 +45,7 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     $plugin_definition,
     protected ThemeManager $themeManager,
     protected ExtensionPathResolver $pathResolver,
-    protected ConfigFactory $config
+    protected ConfigFactory $config,
   ) {
     parent::__construct($configuration,
     $plugin_id,

@@ -111,7 +111,7 @@ final class SettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
 
-    $config = $this->configFactory()->getEditable('social_media_platforms.settings');
+    $config = $this->config('social_media_platforms.settings');
 
     $display_options = $config->get('display_options');
     foreach (self::SETTINGS as $key => $setting) {

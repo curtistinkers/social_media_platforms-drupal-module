@@ -175,8 +175,8 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
     ];
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
-    $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
-    $this->assertCount(1, $ahref);
+    $href = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
+    $this->assertCount(1, $href);
   }
 
   /**
@@ -197,8 +197,8 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
 
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
-    $ahref = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
-    $this->assertCount(0, $ahref);
+    $href = $this->cssSelect('a.social-media-platforms__link[target="_blank"]');
+    $this->assertCount(0, $href);
   }
 
   /**
@@ -245,8 +245,8 @@ final class SocialMediaPlatformsBlockTest extends KernelTestBase {
     ];
     $output = $this->renderer->renderRoot($content);
     $this->setRawContent($output);
-    $ahref = $this->cssSelect('a.social-media-platforms__link.test');
-    $this->assertCount(1, $ahref);
+    $href = $this->cssSelect('a.social-media-platforms__link.test');
+    $this->assertCount(1, $href);
   }
 
 }

@@ -48,9 +48,9 @@ submodule from domain.
 
 ## Icons
 
-The default module icons can be easily overriden implementing a preprocess function for the 'social_media_platform_links' theme element.
+The default module icons can be easily overridden implementing a preprocess function for the 'social_media_platform_links' theme element.
 
-The module contains a css library social_media_platforms.theme, which can be overriden in the theme.
+The module contains a css library social_media_platforms.theme, which can be overridden in the theme.
 
 ## Installation
 

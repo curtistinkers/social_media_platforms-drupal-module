@@ -33,3 +33,8 @@ platforms:
     label: 'Pinterest'
     url: null
     weight: 5
+
+  tiktok:
+    label: 'TikTok'
+    url: null
+    weight: 6

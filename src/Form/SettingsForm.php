@@ -48,7 +48,7 @@ final class SettingsForm extends ConfigFormBase {
     foreach (self::SETTINGS as $key => $setting) {
       // We ignore phpcs on this line to avoid phpcs complaining about
       // "Only string literals should be passed to t() where possible",
-      // sice $setting comes from a literal ( self::SETTINGS ).
+      // since $setting comes from a literal ( self::SETTINGS ).
       $form['display'][$key] = [
         '#type' => 'checkbox',
         // @codingStandardsIgnoreLine

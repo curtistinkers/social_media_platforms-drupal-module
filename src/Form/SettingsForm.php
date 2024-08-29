@@ -48,7 +48,7 @@ final class SettingsForm extends ConfigFormBase {
     foreach (self::SETTINGS as $key => $setting) {
       $form['display'][$key] = [
         '#type' => 'checkbox',
-        '#title' => $setting,
+        '#title' => $this->t($setting),
         '#default_value' => $display_options[$key],
       ];
     }

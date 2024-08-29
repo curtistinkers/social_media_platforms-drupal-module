@@ -120,8 +120,8 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     $form['help'] = [
       '#type' => 'link',
       '#url' => Url::fromRoute('social_media_platforms.settings'),
-      '#title' => 'here',
-      '#prefix' => 'The Social Media Platforms Links configuration can be modified ',
+      '#title' => $this->t('here'),
+      '#prefix' => $this->t('The Social Media Platforms Links configuration can be modified') . ' ',
     ];
 
     return $form;

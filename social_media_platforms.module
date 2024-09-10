@@ -5,6 +5,8 @@
  * Allows to add a block with the links to various social media platforms.
  */
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_theme().
  */
@@ -35,4 +37,23 @@ function social_media_platforms_help($path, $arg) {
     case 'help.page.social_media_platforms':
       return '<p>' . t('This module allows to configure social media platform urls and display them in a block.') . '</p>';
   }
+}
+
+/**
+ * Implements hook_form_ID_alter().
+ */
+function social_media_platforms_form_block_form_alter(&$form) {
+
+  if ($form['settings']['provider']['#value'] != "social_media_platforms") {
+    return;
+  }
+
+  $form['help'] = [
+    '#type' => 'link',
+    '#url' => Url::fromRoute('social_media_platforms.settings'),
+    '#title' => t('here'),
+    '#prefix' => t('The Social Media Platforms Links configuration can be modified') . ' ',
+    '#weight' => 0,
+  ];
+
 }

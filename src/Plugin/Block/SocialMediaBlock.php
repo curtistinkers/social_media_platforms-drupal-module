@@ -5,11 +5,9 @@ namespace Drupal\social_media_platforms\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Extension\ExtensionPathResolver;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Theme\ThemeManager;
-use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -109,22 +107,6 @@ final class SocialMediaBlock extends BlockBase implements ContainerFactoryPlugin
     }
 
     return $output;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-
-    $form = parent::buildConfigurationForm($form, $form_state);
-    $form['help'] = [
-      '#type' => 'link',
-      '#url' => Url::fromRoute('social_media_platforms.settings'),
-      '#title' => $this->t('here'),
-      '#prefix' => $this->t('The Social Media Platforms Links configuration can be modified') . ' ',
-    ];
-
-    return $form;
   }
 
 }

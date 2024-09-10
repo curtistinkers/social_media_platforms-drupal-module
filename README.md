@@ -44,7 +44,7 @@ submodule from domain.
 + X ( Twitter )
 + Instagram
 + Pinterest
-
++ TikTok
 
 ## Icons
 

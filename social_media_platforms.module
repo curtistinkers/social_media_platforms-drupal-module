@@ -5,8 +5,6 @@
  * Allows to add a block with the links to various social media platforms.
  */
 
-use Drupal\Core\Url;
-
 /**
  * Implements hook_theme().
  */
@@ -38,4 +36,3 @@ function social_media_platforms_help($path, $arg) {
       return '<p>' . t('This module allows to configure social media platform urls and display them in a block.') . '</p>';
   }
 }
-

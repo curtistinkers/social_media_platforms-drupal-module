@@ -5,4 +5,4 @@ package: Custom
 core_version_requirement: ^10 || ^11
 configure: social_media_platforms.settings
 dependencies:
-  - 'block:block'
+  - 'drupal:block'

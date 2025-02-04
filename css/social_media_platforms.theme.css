@@ -5,7 +5,9 @@
 .social-media-platforms__link:hover {
   color: #0a58ca;
 }
-.social-media-platforms__link img {
-  display: inline-block;
-  transform: rotate(90deg);
+@media (max-width: 75rem) {
+  .social-media-platforms__link img {
+    display: inline-block;
+    transform: rotate(90deg);
+  }
 }

@@ -7,4 +7,5 @@
 }
 .social-media-platforms__link img {
   display: inline-block;
+  transform: rotate(90deg);
 }

@@ -12,29 +12,39 @@ platforms:
   youtube:
     label: 'Youtube'
     url: null
-    weight: 1
+    weight: 0
 
   linkedin:
     label: 'Linkedin'
     url: null
-    weight: 2
+    weight: 0
 
   x:
     label: 'X'
     url: null
-    weight: 3
+    weight: 0
 
   instagram:
     label: 'Instagram'
     url: null
-    weight: 4
+    weight: 0
 
   pinterest:
     label: 'Pinterest'
     url: null
-    weight: 5
+    weight: 0
 
   tiktok:
     label: 'TikTok'
     url: null
-    weight: 6
+    weight: 0
+
+  bluesky:
+    label: 'Bluesky'
+    url: null
+    weight: 0
+
+  threads:
+    label: 'Threads'
+    url: null
+    weight: 0

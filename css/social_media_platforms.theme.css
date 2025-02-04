@@ -12,6 +12,10 @@
 }
 
 @media (min-width: 75rem) {
+  #block-drupal-cms-olivero-socialmediaplatformlinks > h2 {
+    visibility: hidden;
+  }
+  
   .social-media-platforms__link img {
     transform: rotate(90deg);
   }

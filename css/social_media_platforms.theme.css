@@ -5,3 +5,6 @@
 .social-media-platforms__link:hover {
   color: #0a58ca;
 }
+.social-media-platforms__link img {
+  display: inline-block;
+}

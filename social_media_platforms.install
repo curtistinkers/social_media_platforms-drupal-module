@@ -5,6 +5,8 @@
  * Social Media Platform hook updates file.
  */
 
+
+
 /**
  * Hook update to add tiktok social media platform.
  */
@@ -17,9 +19,67 @@ function social_media_platforms_update_10101() {
     $platforms['tiktok'] = [
       'label' => 'TikTok',
       'url' => NULL,
-      'weight' => 6,
+      'weight' => 0,
     ];
   }
+  $config->set('platforms', $platforms);
+  $config->save();
+
+}
+
+/**
+ * Update to add Bluesky and Threads platforms
+ */
+function social_media_platforms_update_10102() {
+
+  $config = \Drupal::configFactory()->getEditable('social_media_platforms.settings');
+  $platforms = $config->get('platforms');
+
+  if (!isset($platforms['bluesky'])) {
+    $platforms['bluesky'] = [
+      'label' => 'Bluesky',
+      'url' => NULL,
+      'weight' => 0,
+    ];
+  }
+
+  if (!isset($platforms['threads'])) {
+    $platforms['threads'] = [
+      'label' => 'Threads',
+      'url' => NULL,
+      'weight' => 0,
+    ];
+  }
+
+  $config->set('platforms', $platforms);
+  $config->save();
+
+}
+
+/**
+ * Update to add Mastodon and Snapchat platforms
+ */
+function social_media_platforms_update_10103() {
+
+  $config = \Drupal::configFactory()->getEditable('social_media_platforms.settings');
+  $platforms = $config->get('platforms');
+
+  if (!isset($platforms['mastodon'])) {
+    $platforms['mastodon'] = [
+      'label' => 'Mastodon',
+      'url' => NULL,
+      'weight' => 0,
+    ];
+  }
+
+  if (!isset($platforms['snapchat'])) {
+    $platforms['snapchat'] = [
+      'label' => 'Snapchat',
+      'url' => NULL,
+      'weight' => 0,
+    ];
+  }
+
   $config->set('platforms', $platforms);
   $config->save();
 

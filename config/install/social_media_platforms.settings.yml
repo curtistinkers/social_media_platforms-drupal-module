@@ -24,8 +24,18 @@ platforms:
     url: null
     weight: 0
 
+  mastodon:
+    label: 'Mastodon'
+    url: null
+    weight: 0
+
   pinterest:
     label: 'Pinterest'
+    url: null
+    weight: 0
+
+  snapchat:
+    label: 'Snapchat'
     url: null
     weight: 0
 

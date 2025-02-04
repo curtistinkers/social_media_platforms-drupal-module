@@ -5,6 +5,8 @@
  * Social Media Platform hook updates file.
  */
 
+
+
 /**
  * Hook update to add tiktok social media platform.
  */
@@ -20,6 +22,35 @@ function social_media_platforms_update_10101() {
       'weight' => 6,
     ];
   }
+  $config->set('platforms', $platforms);
+  $config->save();
+
+}
+
+/**
+ * Hook update to add bluesky and threads platforms
+ */
+function social_media_platforms_update_10102() {
+
+  $config = \Drupal::configFactory()->getEditable('social_media_platforms.settings');
+  $platforms = $config->get('platforms');
+
+  if (!isset($platforms['bluesky'])) {
+    $platforms['bluesky'] = [
+      'label' => 'Bluesky',
+      'url' => NULL,
+      'weight' => 6,
+    ];
+  }
+
+  if (!isset($platforms['threads'])) {
+    $platforms['threads'] = [
+      'label' => 'Threads',
+      'url' => NULL,
+      'weight' => 6,
+    ];
+  }
+
   $config->set('platforms', $platforms);
   $config->save();
 

@@ -45,6 +45,8 @@ submodule from domain.
 + Instagram
 + Pinterest
 + TikTok
++ Bluesky
++ Threads
 
 ## Icons
 
